@@ -1,0 +1,344 @@
+# CURSOR RULES - Python Standards
+# Place in: .cursor/rules/python.mdc
+
+---
+description: "Python-specific coding standards for Marcus AI Avatar backend services"
+globs: ["**/*.py"]
+alwaysApply: true
+---
+
+# 🐍 Python Standards for Marcus AI Avatar
+
+## Code Style
+
+```python
+# Formatter: Black, 88 char line length
+# Type hints: MANDATORY on all functions
+# Docstrings: Google style
+
+def function_name(param: Type, optional: Type | None = None) -> ReturnType:
+    """Short description.
+    
+    Longer description if needed.
+    
+    Args:
+        param: Description of param.
+        optional: Description of optional param.
+        
+    Returns:
+        Description of return value.
+        
+    Raises:
+        ErrorType: When this error occurs.
+    """
+    pass
+```
+
+## Import Order
+
+```python
+# 1. Standard library
+import asyncio
+import logging
+import time
+from dataclasses import dataclass
+from typing import AsyncGenerator, Optional
+
+# 2. Third-party
+import numpy as np
+from fastapi import FastAPI, WebSocket
+from pydantic import BaseModel
+
+# 3. Local
+from .models import PADState
+from .utils import log_latency
+```
+
+## Async Patterns (MANDATORY)
+
+```python
+# ✅ CORRECT: Async I/O
+async def fetch_data() -> dict:
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.json()
+
+# ❌ WRONG: Blocking I/O
+def fetch_data() -> dict:
+    return requests.get(url).json()  # BLOCKS EVENT LOOP
+```
+
+## Logging (NEVER use print())
+
+```python
+import logging
+
+logger = logging.getLogger(__name__)
+
+# ✅ CORRECT
+logger.info("Processing started")
+logger.warning(f"Latency exceeded: {ms:.1f}ms")
+logger.error(f"Failed to connect: {e}")
+
+# ❌ WRONG
+print("Processing started")
+print(f"Error: {e}")
+```
+
+## Latency Instrumentation (MANDATORY for servers)
+
+```python
+import time
+import functools
+import logging
+
+logger = logging.getLogger(__name__)
+
+def log_latency(stage: str):
+    """Decorator to log execution time of async functions."""
+    def decorator(func):
+        @functools.wraps(func)
+        async def wrapper(*args, **kwargs):
+            t0 = time.perf_counter()
+            try:
+                result = await func(*args, **kwargs)
+                return result
+            finally:
+                elapsed_ms = (time.perf_counter() - t0) * 1000
+                logger.info(f"[LATENCY] {stage}: {elapsed_ms:.1f}ms")
+        return wrapper
+    return decorator
+
+# Usage
+@log_latency("flame_inference")
+async def process_audio(audio: bytes) -> dict:
+    # ... processing
+    return result
+```
+
+## Data Models (Pydantic or dataclass)
+
+```python
+from dataclasses import dataclass
+from pydantic import BaseModel, Field
+
+# For internal use
+@dataclass
+class PADState:
+    pleasure: float  # -1 to 1
+    arousal: float   # -1 to 1
+    dominance: float # -1 to 1
+
+# For API validation
+class AnimationFrame(BaseModel):
+    frame_id: int
+    timestamp: str
+    blend_shapes: dict[str, float] = Field(
+        ..., 
+        description="ARKit blend shape values 0-1"
+    )
+    audio_chunk: str | None = None
+    pad_state: dict[str, float] | None = None
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "frame_id": 42,
+                "timestamp": "2025-11-21T15:00:00Z",
+                "blend_shapes": {"jawOpen": 0.5, "mouthSmile": 0.3}
+            }
+        }
+```
+
+## Error Handling Pattern
+
+```python
+class ProcessingError(Exception):
+    """Base exception for processing errors."""
+    pass
+
+class FLAMEError(ProcessingError):
+    """FLAME model inference failed."""
+    pass
+
+async def process_with_fallback(data: InputType) -> OutputType:
+    """Process with graceful degradation."""
+    try:
+        return await primary_processor(data)
+    except FLAMEError as e:
+        logger.warning(f"FLAME failed: {e}, using fallback")
+        return await fallback_processor(data)
+    except Exception as e:
+        logger.error(f"All processors failed: {e}")
+        return get_neutral_state()
+
+def get_neutral_state() -> OutputType:
+    """Return safe default state when all else fails."""
+    return OutputType(
+        blend_shapes={"jawOpen": 0.0},
+        pad_state={"pleasure": 0.0, "arousal": 0.0, "dominance": 0.0}
+    )
+```
+
+## FastAPI Endpoint Pattern
+
+```python
+from fastapi import FastAPI, WebSocket, HTTPException
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Startup and shutdown logic."""
+    logger.info("Starting FLAME server...")
+    await load_model()
+    yield
+    logger.info("Shutting down FLAME server...")
+    await cleanup()
+
+app = FastAPI(
+    title="Marcus FLAME Server",
+    version="0.1.0",
+    lifespan=lifespan
+)
+
+@app.get("/health")
+async def health_check() -> dict:
+    """Health check endpoint (MANDATORY)."""
+    return {"status": "healthy", "service": "flame-server"}
+
+@app.post("/process")
+@log_latency("process_endpoint")
+async def process_audio(request: AudioRequest) -> AnimationFrame:
+    """Process audio and return animation frame."""
+    try:
+        result = await flame_inference(request.audio)
+        return AnimationFrame(**result)
+    except Exception as e:
+        logger.error(f"Processing failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+```
+
+## WebSocket Pattern
+
+```python
+from fastapi import WebSocket, WebSocketDisconnect
+
+@app.websocket("/stream")
+async def websocket_stream(websocket: WebSocket):
+    """Real-time animation streaming."""
+    await websocket.accept()
+    logger.info("WebSocket client connected")
+    
+    try:
+        while True:
+            data = await websocket.receive_json()
+            
+            t0 = time.perf_counter()
+            result = await process_frame(data)
+            latency_ms = (time.perf_counter() - t0) * 1000
+            
+            await websocket.send_json({
+                **result,
+                "server_latency_ms": latency_ms
+            })
+    except WebSocketDisconnect:
+        logger.info("WebSocket client disconnected")
+    except Exception as e:
+        logger.error(f"WebSocket error: {e}")
+        await websocket.close(code=1011)
+```
+
+## Testing Pattern (pytest)
+
+```python
+import pytest
+from unittest.mock import AsyncMock, patch
+
+@pytest.fixture
+def sample_audio() -> bytes:
+    """Sample audio fixture."""
+    return b"fake_audio_data"
+
+@pytest.fixture
+def expected_blend_shapes() -> dict:
+    """Expected output fixture."""
+    return {"jawOpen": 0.5, "mouthSmile": 0.3}
+
+@pytest.mark.asyncio
+async def test_process_audio(sample_audio, expected_blend_shapes):
+    """Test audio processing returns valid blend shapes."""
+    result = await process_audio(sample_audio)
+    
+    assert "blend_shapes" in result
+    assert all(0 <= v <= 1 for v in result["blend_shapes"].values())
+
+@pytest.mark.asyncio
+async def test_fallback_on_error():
+    """Test graceful degradation on FLAME error."""
+    with patch("flame_model.infer", side_effect=FLAMEError("GPU OOM")):
+        result = await process_with_fallback(sample_input)
+        
+    assert result is not None  # Should return fallback, not crash
+
+def test_latency_under_threshold(benchmark):
+    """Benchmark: processing must complete under 200ms."""
+    result = benchmark(sync_wrapper, sample_input)
+    assert benchmark.stats["mean"] < 0.200  # 200ms
+```
+
+## File I/O (Always async)
+
+```python
+import aiofiles
+
+# ✅ CORRECT: Async file I/O
+async def read_config(path: str) -> dict:
+    async with aiofiles.open(path, 'r') as f:
+        content = await f.read()
+    return json.loads(content)
+
+# ❌ WRONG: Blocking file I/O in async context
+async def read_config(path: str) -> dict:
+    with open(path, 'r') as f:  # BLOCKS
+        return json.load(f)
+```
+
+## Configuration (Never hardcode)
+
+```python
+from pydantic_settings import BaseSettings
+
+class Settings(BaseSettings):
+    """Application settings from environment."""
+    
+    flame_model_path: str = "/models/flame"
+    server_port: int = 5001
+    log_level: str = "INFO"
+    max_latency_ms: int = 200
+    
+    class Config:
+        env_prefix = "MARCUS_"
+        env_file = ".env"
+
+settings = Settings()
+
+# Usage
+model = load_model(settings.flame_model_path)
+```
+
+## Main Entry Point
+
+```python
+# ✅ CORRECT: Always include for standalone testing
+if __name__ == "__main__":
+    import uvicorn
+    
+    logging.basicConfig(level=logging.INFO)
+    uvicorn.run(
+        "server:app",
+        host="0.0.0.0",
+        port=settings.server_port,
+        reload=True
+    )
+```
+
