@@ -1,0 +1,2171 @@
+{
+  "metadata": {
+    "generated_at": "2025-11-26T07:41:28.645317",
+    "raters": [
+      "claude",
+      "gpt4"
+    ]
+  },
+  "evaluations": [
+    {
+      "scenario_id": "PHIL-001",
+      "scenario": {
+        "scenario_id": "PHIL-001",
+        "user_input": "What would Marcus Aurelius say about dealing with people who constantly criticize me at work?",
+        "context": "User is a mid-level manager facing workplace criticism",
+        "domain": "philosophy",
+        "difficulty": 2
+      },
+      "pairs": [
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 5,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "winner": "A",
+              "reasoning": "Response A demonstrates deeper Stoic wisdom with more authentic Aurelius-style language and metaphors, while providing clearer actionable steps like assessing criticism validity and embracing obstacles as teachers. Though Response B shows slightly more empathy, Response A's superior philosophical depth and practical guidance make it the stronger response overall."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "winner": "A",
+              "reasoning": "Response A provides a deeper philosophical insight into handling criticism, emphasizing self-reflection and growth, making it more aligned with Stoic principles."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with authentic Marcus Aurelius quotes and comprehensive Stoic principles, while also showing greater empathy by acknowledging shared humanity and the complexity of workplace relationships."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B directly quotes and interprets Marcus Aurelius, providing deeper philosophical insight and more specific, empathetic, and actionable advice."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with authentic Marcus Aurelius quotes and structured Stoic principles, while providing more specific, actionable guidance through clear frameworks for self-examination and response strategies."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides deeper philosophical insights directly linked to Marcus Aurelius's teachings, demonstrates greater empathy by acknowledging the user's situation, and offers more specific, actionable advice."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with authentic Marcus Aurelius quotes and comprehensive Stoic principles, while also providing more practical, actionable guidance for handling workplace criticism."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B offers deeper philosophical insights directly tied to Marcus Aurelius' teachings, demonstrates greater empathy by considering the user's feelings and the critic's perspective, and provides more specific, actionable advice."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates deeper philosophical understanding with structured Stoic principles, provides more empathetic acknowledgment of the difficulty, and offers concrete actionable steps like self-examination questions and specific behavioral guidance."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B offers deeper philosophical insights, demonstrates greater empathy by considering the source of criticism, and provides more specific, actionable advice."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4_stoic",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionability": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with more accurate Stoic principles, better emotional intelligence in acknowledging the difficulty of criticism, and provides clearer, more actionable guidance through its structured approach and specific steps for self-examination and response."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "A",
+              "reasoning": "Response A provides a deeper philosophical insight into Stoicism and integrates empathy more seamlessly into its guidance."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scenario_id": "PHIL-002",
+      "scenario": {
+        "scenario_id": "PHIL-002",
+        "user_input": "How can I practice negative visualization without becoming pessimistic?",
+        "context": "User is new to Stoicism",
+        "domain": "philosophy",
+        "difficulty": 3
+      },
+      "pairs": [
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "While Response A demonstrates deeper philosophical understanding, Response B provides comprehensive, step-by-step guidance that a Stoicism newcomer can immediately implement to practice negative visualization safely."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 3,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides more structured and practical steps for implementing negative visualization without becoming pessimistic, making it more actionable."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides more comprehensive guidance with clearer warnings about potential pitfalls and more detailed practical steps, while demonstrating deeper understanding of Stoic principles and showing greater sensitivity to the user's concerns as a beginner."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B slightly edges out with higher empathy, acknowledging the user's potential feelings more directly and offering reassurance about the practice."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionability": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionability": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with proper terminology and historical references, provides comprehensive practical guidance with specific techniques, and shows greater empathy by acknowledging the user's wisdom in asking the question while offering concrete steps for implementation."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper understanding of Stoic principles with practical steps, balancing philosophical insight with empathy and clear, actionable advice."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates deeper philosophical understanding of Stoic principles and the true purpose of negative visualization, while Response A's advice to balance with positive visualization misunderstands the technique's core intent."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "A",
+              "reasoning": "Response A provides a more structured and detailed approach to practicing negative visualization, making it easier for someone new to Stoicism to follow and implement."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionability": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionability": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with authentic Stoic references and terminology, while showing greater emotional intelligence through its welcoming tone and understanding of the user's concerns. Both responses offer practical guidance, but B's wisdom and empathy create a more compelling overall experience."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper philosophical context and connects more empathetically with the user, despite being slightly less actionable."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4_stoic",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 4,
+                "actionability": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionability": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with specific Stoic references and terminology, provides concrete step-by-step guidance with practical examples, and maintains a warm, encouraging tone that directly addresses the user's concerns about pessimism."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper understanding of Stoic principles, demonstrates greater empathy by directly addressing the user's concern, and offers more specific, actionable advice."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scenario_id": "PHIL-003",
+      "scenario": {
+        "scenario_id": "PHIL-003",
+        "user_input": "I understand that I can't control external events, but I still feel angry when bad things happen. What am I doing wrong?",
+        "context": "User struggles with emotional response despite intellectual understanding",
+        "domain": "philosophy",
+        "difficulty": 4
+      },
+      "pairs": [
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 5,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 2,
+                "empathy": 5,
+                "actionable": 3
+              },
+              "winner": "A",
+              "reasoning": "Response A provides deeper philosophical insight by addressing the root cause of suffering through attachment and expectations, while offering concrete Stoic practices for self-examination and virtue cultivation. Though Response B shows greater empathy, Response A's superior wisdom and actionable guidance make it more valuable for someone seeking philosophical growth."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 2,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "A",
+              "reasoning": "Response A offers deeper philosophical insight and encourages introspection, aligning more closely with Stoic principles."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 2,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides equally strong philosophical wisdom while showing significantly more empathy by reassuring the user they're not doing anything wrong and emphasizing that Stoicism is a practice requiring patience. It also offers more comprehensive and gentle actionable guidance for managing the emotional journey."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B offers a deeper understanding of Stoic principles with greater empathy and clearer, more practical advice for managing emotions."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 2,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with specific Stoic references while showing exceptional empathy by normalizing the struggle and providing concrete, step-by-step practices. It offers more actionable guidance with clear techniques and maintains compassionate understanding throughout."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper philosophical insight, demonstrates greater empathy by acknowledging the user's struggle, and offers more concrete, step-by-step guidance for managing emotions."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 2,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates deep Stoic philosophical understanding while maintaining exceptional empathy, providing specific questions for self-examination and clearly explaining the gap between intellectual understanding and emotional practice. Response A offers general advice but lacks the philosophical depth and specific guidance that directly addresses the user's Stoic struggle."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper philosophical insight into the Stoic approach to emotions, while still maintaining empathy and offering actionable advice."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 2,
+                "empathy": 4,
+                "actionability": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionability": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates deep philosophical understanding with specific Stoic references and practical techniques, while maintaining exceptional empathy and providing concrete, implementable steps for managing the emotion-understanding gap."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides deeper philosophical insight and practical steps for integrating understanding with emotion, making it more comprehensive."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4_stoic",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with specific references to Epictetus and Marcus Aurelius, provides more concrete practical techniques, and ends with an empathetic question that invites further dialogue."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a more detailed, step-by-step approach to managing emotions, demonstrating higher wisdom, empathy, and actionability."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scenario_id": "PHIL-004",
+      "scenario": {
+        "scenario_id": "PHIL-004",
+        "user_input": "Is Stoicism just about suppressing emotions? That doesn't seem healthy.",
+        "context": "User has common misconception about Stoicism",
+        "domain": "philosophy",
+        "difficulty": 2
+      },
+      "pairs": [
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionability": 4
+              },
+              "response_b": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionability": 2
+              },
+              "winner": "A",
+              "reasoning": "Response A provides deeper philosophical insight with practical guidance on transforming emotions into wisdom, while Response B offers a more basic explanation without actionable steps for implementation."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 3,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "winner": "A",
+              "reasoning": "Response A provides a deeper philosophical insight into Stoicism and offers a more empathetic and actionable approach to managing emotions."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides deeper philosophical understanding with concrete examples and specific techniques, while Response A offers more general advice without clear implementation steps."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper understanding of Stoicism, offers more empathetic acknowledgment of the user's feelings, and gives clearer, more practical advice for applying Stoic principles."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionability": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides deeper philosophical understanding with specific Stoic concepts and historical references, while offering more practical guidance and directly addressing the user's concern with empathy."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper understanding of Stoicism, addresses the misconception with greater empathy, and offers more specific, actionable advice."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionability": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionability": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with concrete examples and specific Stoic techniques, while also providing clear, actionable steps for emotional transformation rather than just correction of the misconception."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper understanding of Stoicism, shows more empathy by acknowledging the naturalness of emotions, and offers more concrete steps for dealing with emotions."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides deeper philosophical understanding with specific Stoic concepts, practical techniques for emotional management, and ends with an empathetic question that invites further dialogue. While Response A correctly addresses the misconception, it lacks the depth, actionable guidance, and personal engagement that makes Response B significantly more valuable."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper understanding of Stoicism, addresses the user's concerns with more empathy, and offers more concrete steps for applying Stoic principles."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4_stoic",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical understanding by clearly distinguishing between initial reactions and judgments, includes a relevant Marcus Aurelius quote, and engages the user more empathetically by asking a follow-up question while providing more structured, actionable guidance."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B slightly edges out with higher empathy and actionability, making Stoicism more accessible and relatable to the user."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scenario_id": "PHIL-005",
+      "scenario": {
+        "scenario_id": "PHIL-005",
+        "user_input": "How do I reconcile Stoic acceptance with the need to fight for social justice?",
+        "context": "User sees tension between acceptance and activism",
+        "domain": "philosophy",
+        "difficulty": 5
+      },
+      "pairs": [
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionability": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionability": 3
+              },
+              "winner": "A",
+              "reasoning": "Response A demonstrates deeper philosophical insight by explicitly connecting justice as a Stoic virtue and provides more concrete guidance through the reflective question about engaging with service without attachment to results. It offers a more nuanced understanding of how Stoic principles can actively support rather than hinder social justice work."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "winner": "A",
+              "reasoning": "Response A provides a deeper philosophical insight into Stoicism and integrates it more thoroughly with the concept of social justice, offering a more nuanced approach to activism."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "winner": "B",
+              "reasoning": "Response B provides deeper philosophical understanding by thoroughly explaining the Stoic concept of control and connecting it to shared humanity, while also showing greater empathy by acknowledging the user's thoughtful inquiry and validating the perceived tension."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "A",
+              "reasoning": "Response A provides a slightly deeper understanding of Stoic principles in action, emphasizing virtue and integrity in the pursuit of justice."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides deeper philosophical analysis with concrete examples from Stoic figures, clearer practical frameworks for action, and better acknowledges the emotional complexity of balancing acceptance with activism."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper philosophical exploration, demonstrates greater empathy by acknowledging the user's potential feelings, and offers more detailed, actionable advice."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 2,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates deeper philosophical understanding by explicitly connecting Stoic principles to social responsibility and shared humanity, while also showing greater empathy by acknowledging the thoughtfulness of the inquiry and providing more comprehensive, actionable guidance."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper philosophical understanding, shows greater empathy by acknowledging the user's feelings more directly, and offers clearer, more detailed actionable advice."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 2,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with specific Stoic examples and clearer practical frameworks, while also showing greater empathy by acknowledging the profound nature of the dilemma and ending with an engaging question."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper philosophical insight into Stoicism and its application to activism, offering more practical and nuanced advice for action."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4_stoic",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with concrete historical examples and clearer practical frameworks, while also engaging the user more directly with a closing question that invites reflection."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a clearer distinction between acceptance and passivity, and offers more specific guidance on how to engage in activism within a Stoic framework."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scenario_id": "PHIL-006",
+      "scenario": {
+        "scenario_id": "PHIL-006",
+        "user_input": "What does 'live according to nature' actually mean in modern life?",
+        "context": "User seeking practical interpretation of Stoic principle",
+        "domain": "philosophy",
+        "difficulty": 3
+      },
+      "pairs": [
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionability": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 3,
+                "actionability": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical understanding by clearly explaining the Stoic concept of focusing on what you can control versus what you cannot, while providing more concrete and actionable guidance for modern implementation."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "winner": "A",
+              "reasoning": "Response A provides a more comprehensive understanding of Stoicism and integrates empathy effectively, though slightly less actionable than B."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 4,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides superior philosophical depth with clear explanations of Stoic principles and offers concrete, actionable guidance through its structured breakdown of practical applications. While Response A is more emotionally engaging, Response B delivers more comprehensive wisdom and implementable advice."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a more detailed and structured approach to living according to nature, with clear, actionable steps that are directly applicable to modern life."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 4,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth by clearly explaining the dual nature (rational and social) of Stoic human nature, while providing concrete, actionable examples that make the abstract principle practically applicable to modern life."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper understanding of Stoic principles, shows greater empathy by acknowledging the interconnectedness of our actions, and offers more specific, actionable advice."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 2,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with its systematic breakdown of Stoic principles and provides more comprehensive, actionable guidance while showing greater understanding of human nature and practical needs."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a more detailed and structured approach, offering clearer guidance and a deeper understanding of Stoic principles."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 2,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with accurate Stoic interpretation, provides concrete practical examples, and engages the user personally with a follow-up question. Response A conflates Stoicism with environmentalism and lacks the nuanced understanding and actionable guidance that Response B offers."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B offers a deeper philosophical understanding, connects more empathetically by recognizing our interconnectedness, and provides clearer, more specific actions."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4_stoic",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionability": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionability": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates deeper philosophical understanding with more nuanced explanations and provides more concrete, implementable examples while maintaining stronger emotional connection through its conversational tone and direct question to the user."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B delves deeper into Stoic philosophy with practical, modern examples, showing greater empathy and offering more actionable advice."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scenario_id": "PHIL-007",
+      "scenario": {
+        "scenario_id": "PHIL-007",
+        "user_input": "Can you explain the Stoic concept of the 'inner citadel'?",
+        "context": "User wants to understand key Stoic metaphor",
+        "domain": "philosophy",
+        "difficulty": 2
+      },
+      "pairs": [
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 2,
+                "actionable": 2
+              },
+              "winner": "A",
+              "reasoning": "While Response B demonstrates superior philosophical accuracy by explicitly mentioning the four cardinal virtues, Response A provides a more balanced approach with strong practical guidance and emotional resonance that makes Stoic principles accessible and implementable."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "winner": "A",
+              "reasoning": "Response A provides a more empathetic and actionable guide on how to apply the concept of the 'inner citadel', making it more useful for practical application."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 4,
+                "actionability": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 3,
+                "actionability": 3
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with nuanced understanding of Stoic principles like the dichotomy of control and proper engagement with the world, while Response A, though more immediately actionable, lacks the conceptual precision needed for quality philosophical guidance."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper philosophical understanding of the 'inner citadel' and offers more nuanced, implementable guidance for cultivating it."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionability": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionability": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with specific references to Marcus Aurelius and the four cardinal virtues, while providing more concrete examples and clearer practical applications of the inner citadel concept."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper philosophical explanation with direct references to Stoic principles and offers clear, actionable advice on maintaining the inner citadel."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 2,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionability": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with nuanced explanations of Stoic principles, shows greater empathy by acknowledging the lifelong journey and need for patience, and provides more actionable guidance through specific practices like responding rather than reacting and aligning will with reality."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper philosophical insight into the concept of the 'inner citadel', shows greater empathy by acknowledging the journey and effort required, and offers more actionable advice on cultivating resilience and equanimity."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 2,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with concrete examples and Marcus Aurelius quotes, shows greater empathy by acknowledging real human struggles, and provides actionable guidance through specific practices and a personalized closing question."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper philosophical insight into the concept of the 'inner citadel', shows greater empathy by acknowledging the challenges one might face, and offers more actionable advice on how to maintain it."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4_stoic",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with specific references to Marcus Aurelius and the cardinal virtues, while also providing more concrete examples and ending with an engaging question that invites personal reflection."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "A",
+              "reasoning": "Response A provides a slightly deeper understanding of Stoic principles and the metaphor's philosophical depth, while both responses are equally empathetic and B is slightly more actionable."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scenario_id": "PHIL-008",
+      "scenario": {
+        "scenario_id": "PHIL-008",
+        "user_input": "How does Stoicism view the pursuit of wealth and career success?",
+        "context": "User is ambitious professional wondering about Stoic perspective",
+        "domain": "philosophy",
+        "difficulty": 3
+      },
+      "pairs": [
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionability": 5
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionability": 3
+              },
+              "winner": "A",
+              "reasoning": "Response A demonstrates deeper Stoic wisdom by emphasizing the dichotomy of control and provides more actionable guidance through reflective questions and specific behavioral recommendations. It better connects philosophical principles to practical application for an ambitious professional."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "winner": "A",
+              "reasoning": "Response A provides deeper philosophical insight into Stoicism's view on wealth and career, emphasizing virtue and character alignment with ambitions, making it more insightful and actionable."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth by properly explaining the concept of 'preferred indifferents' and provides more comprehensive coverage of Stoic principles while maintaining strong practical guidance. It also shows better empathy by acknowledging the complexity of professional ambitions and offering more nuanced advice."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a slightly deeper understanding of Stoic principles regarding indifferents and virtues, making it more philosophically rich."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with specific references to Stoic philosophers and concepts like 'preferred indifferents,' while providing more structured, practical guidance that directly addresses the professional context."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a more nuanced and practical understanding of Stoicism, directly referencing Stoic philosophers and offering clear, implementable advice."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 2,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with precise Stoic terminology ('preferred indifferents'), provides more empathetic guidance tailored to the ambitious professional, and offers concrete reflective questions for practical implementation."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B delves deeper into Stoic philosophy, providing a more nuanced explanation and actionable advice, particularly in examining motivations and maintaining detachment."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 2,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with specific references to Stoic philosophers and concepts, while providing concrete, actionable guidance tailored to an ambitious professional's situation. It also shows greater empathy by directly addressing the user's tension and ending with a personalized question."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper philosophical insight with practical examples and directly addresses the user's context, making it more empathetic and actionable."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4_stoic",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth by citing specific Stoic figures and their practices, provides more empathetic engagement with the user's situation, and offers highly actionable guidance with concrete questions and practical frameworks."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a slightly deeper exploration of Stoic principles and offers more concrete examples and advice for application, making it both more insightful and actionable."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scenario_id": "PHIL-009",
+      "scenario": {
+        "scenario_id": "PHIL-009",
+        "user_input": "What's the difference between Stoic indifference and not caring about anything?",
+        "context": "User confused about apatheia concept",
+        "domain": "philosophy",
+        "difficulty": 4
+      },
+      "pairs": [
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 2,
+                "actionable": 2
+              },
+              "winner": "A",
+              "reasoning": "Response A provides more actionable guidance with reflective questions and practical steps for implementation, while maintaining strong philosophical depth. Response B is more informative but lacks the practical engagement needed for philosophical growth."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "winner": "A",
+              "reasoning": "Response A provides a deeper philosophical insight into Stoic indifference, offers a compassionate understanding, and gives more actionable advice on how to apply these principles."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 3,
+                "actionability": 3
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a more thorough and accurate explanation of the Stoic concept of apatheia with clearer philosophical distinctions, while Response A offers better practical guidance but less precise philosophical understanding."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "winner": "B",
+              "reasoning": "Response B offers a deeper understanding of Stoic principles, clearly distinguishing between Stoic indifference and apathy. While both responses are empathetic, B's focus on Stoic wisdom gives it an edge."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionability": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionability": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides superior philosophical depth with clear distinctions, concrete examples from Marcus Aurelius and Epictetus, and practical illustrations like the parent example that make the concept immediately applicable."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper and clearer explanation of Stoic indifference, with practical examples and a compassionate understanding of the user's confusion."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides deeper philosophical understanding by explaining the control dichotomy central to Stoicism and offers more practical guidance about where to direct one's care and attention. It demonstrates superior wisdom through its comprehensive explanation of apatheia and greater actionability by clearly outlining what Stoics should focus on versus avoid."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper understanding of Stoic principles and offers a more empathetic and actionable approach to applying these principles in daily life."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 2,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with concrete examples from Marcus Aurelius and Epictetus, provides practical illustrations like the parent-child scenario, and shows greater empathy by acknowledging common misunderstandings while offering actionable guidance for implementation."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper understanding of Stoic principles, shows more empathy by addressing potential misconceptions, and offers clearer, more practical advice on how to apply Stoic indifference."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4_stoic",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionability": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionability": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides superior philosophical depth with concrete examples from Marcus Aurelius and Epictetus, offers more empathetic understanding of the confusion, and delivers highly actionable guidance through the practical parenting example and clear bullet-pointed distinctions."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a deeper understanding of Stoic principles with practical examples, and shows greater empathy by addressing potential emotional concerns."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scenario_id": "PHIL-010",
+      "scenario": {
+        "scenario_id": "PHIL-010",
+        "user_input": "How do I practice the view from above when I'm stuck in daily problems?",
+        "context": "User knows technique but struggles with application",
+        "domain": "philosophy",
+        "difficulty": 3
+      },
+      "pairs": [
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionability": 2
+              },
+              "response_b": {
+                "wisdom": 3,
+                "empathy": 4,
+                "actionability": 5
+              },
+              "winner": "B",
+              "reasoning": "While Response A demonstrates deeper philosophical insight, Response B provides significantly more practical, step-by-step guidance that directly addresses the user's struggle with application, which was their specific need."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides clearer, step-by-step guidance on how to practice the technique, making it more actionable for someone struggling with application."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 3,
+                "actionability": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionability": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth with specific Stoic principles, provides concrete actionable steps, and includes a relevant Marcus Aurelius quote, while Response A remains too abstract and vague for practical application."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B provides a more detailed, step-by-step guide on practicing the view from above, making it more actionable and demonstrating deeper understanding and empathy."
+            }
+          }
+        },
+        {
+          "model_a": "marcus",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 2,
+                "actionability": 2
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionability": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior philosophical depth by referencing Marcus Aurelius and core Stoic principles, shows genuine empathy by acknowledging the user's struggle as normal, and provides concrete, graduated techniques that address the user's specific difficulty with application."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionable": 2
+              },
+              "response_b": {
+                "wisdom": 3,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B offers more practical, step-by-step advice for applying the view from above, making it more accessible and actionable for the user."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "gpt4_stoic",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 3,
+                "actionability": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates deeper philosophical understanding by integrating core Stoic principles like the dichotomy of control and examining impressions, while Response A focuses more narrowly on the visualization technique itself. Though Response A is slightly more actionable, Response B's superior wisdom and integration of fundamental Stoic concepts makes it the stronger philosophical guidance overall."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 3,
+                "actionable": 4
+              },
+              "winner": "A",
+              "reasoning": "Response A provides a more structured and detailed approach to practicing the view from above, making it slightly more actionable for someone struggling with daily problems."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 3,
+                "empathy": 2,
+                "actionability": 4
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionability": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates deeper philosophical understanding by referencing Marcus Aurelius and core Stoic principles like the discipline of desire, while showing greater empathy by acknowledging the human struggle and offering more nuanced, psychologically informed approaches."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 5
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionable": 4
+              },
+              "winner": "B",
+              "reasoning": "Response B provides deeper philosophical insight and shows greater empathy by acknowledging the commonality of the struggle, making it the overall winner."
+            }
+          }
+        },
+        {
+          "model_a": "gpt4_stoic",
+          "model_b": "claude",
+          "ratings": {
+            "claude": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 3,
+                "actionability": 3
+              },
+              "response_b": {
+                "wisdom": 5,
+                "empathy": 5,
+                "actionability": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B demonstrates superior empathy by acknowledging the human struggle and referencing Marcus Aurelius's own difficulties, while providing more specific, graduated practical techniques and ending with an engaging question that invites deeper exploration."
+            },
+            "gpt4": {
+              "response_a": {
+                "wisdom": 4,
+                "empathy": 4,
+                "actionable": 4
+              },
+              "response_b": {
+                "wisdom": 4,
+                "empathy": 5,
+                "actionable": 5
+              },
+              "winner": "B",
+              "reasoning": "Response B offers a slightly more empathetic understanding of the user's struggle and provides more specific, actionable advice for practicing the view from above."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
