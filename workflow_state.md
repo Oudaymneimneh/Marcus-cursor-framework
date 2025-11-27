@@ -8,11 +8,11 @@
 ## State
 
 ```yaml
-Phase: VALIDATE
-Status: COMPLETED
-CurrentTask: Frontend Implementation
-LastUpdated: 2025-11-23
-SessionCount: 2
+Phase: CONSTRUCT
+Status: INTROSPECTION_ENHANCED
+CurrentTask: Marcus Brain Enhancement Complete - Ready for Testing
+LastUpdated: 2025-11-27
+SessionCount: 4
 ```
 
 ---
@@ -105,6 +105,53 @@ RULE_SESSION_START:
 ## Log
 
 ```
+[2025-11-27 SESSION_4] INTROSPECTION_ENHANCEMENT
+- Enhanced strategy selection with keyword-based crisis/energy detection
+  * Added 16 crisis keywords, 16 energy keywords
+  * PAD-based crisis threshold lowered to -0.5
+  * PAD-based energy threshold set to -0.3
+  * Pattern-based strategy selection (catastrophizing → reflective)
+- Verified advanced sentiment analyzer integration
+  * Added transformers, torch to requirements.txt
+  * Improved logging to show which mode is active
+- Enhanced pattern detection with false positive prevention
+  * Expanded catastrophizing keywords (20 total)
+  * Expanded solution-seeking keywords (20 total)
+  * Added balance indicators for false positive prevention
+  * Multi-indicator confidence scoring
+- Calibrated effectiveness formula
+  * Adjusted pleasure weight from 3.0 to 2.5
+  * Added arousal contribution for both high and low states
+  * Added strategy-appropriate bonus (+0.2 for correct strategy)
+  * Enhanced negative streak break detection
+- Added learning tracking system
+  * get_learning_metrics() - tracks learning stage
+  * calculate_learning_curve() - measures improvement over time
+  * Learning stages: cold_start → warming_up → learning → proficient → expert
+- Status: Ready for testing with 50+ scenarios
+- Time: ~2 hours
+
+[2025-11-26 SESSION_3 - Part 2] API_COMPATIBILITY_LAYER
+- Verified simplified /api/v1/chat endpoint (already implemented!)
+- Enhanced health check with M4 Max hardware info
+- Verified CORS configuration includes frontend ports
+- Created comprehensive API_TESTING_GUIDE.md
+- All backend compatibility tasks complete
+- Status: Ready for frontend integration
+- Time: ~30 minutes
+
+[2025-11-26 SESSION_3 - Part 1] HARDWARE_UPGRADE
+- Detected Apple M4 Max (40-core GPU, 64GB RAM)
+- Updated project_config.md with enhanced targets:
+  * Latency: <800ms (from <2000ms)
+  * Quality: 4K@60fps, 48kHz audio, 50K particles
+  * Models: Full precision (no quantization)
+- Updated FLAME server for Metal GPU acceleration
+- Updated TTS server for 48kHz studio audio
+- Created M4_MAX_CONFIG.md with comprehensive settings
+- Decision logged: Leverage local GPU, eliminate cloud costs
+- Status: Configuration complete, ready to proceed
+
 [2025-11-21 15:00:00] SESSION_START
 - Initialized project_config.md
 - Initialized workflow_state.md
@@ -130,6 +177,7 @@ RULE_SESSION_START:
 
 | Date | Decision | Rationale | Alternatives Considered |
 |------|----------|-----------|------------------------|
+| 2025-11-26 | Upgrade targets for M4 Max hardware | Development machine upgraded to M4 Max (40-core GPU, 64GB RAM). Reconfigured all quality targets: 4K@60fps, 48kHz audio, <800ms latency, 50K particles, full-precision models. Local GPU eliminates cloud costs. | Keep conservative targets, cloud GPU offload |
 | 2025-11-21 | Use FLAME over Audio2Face | Community feedback: FLAME provides unified lip sync + micro expressions + head movement. Audio2Face only does lip sync. | Audio2Face, custom blend shape system |
 | 2025-11-21 | Use Chatterbox over ElevenLabs | Local hosting eliminates API latency, no per-character costs, full voice control | ElevenLabs, Azure TTS, Coqui |
 | 2025-11-21 | MetaHuman as base mesh only | Community insight: Keep topology/rig, rebuild textures, reshape face | Full custom model, CC4 |

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcus AI - Response Quality Rating</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .progress {
+            background: #f0f0f0;
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .scenario-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        
+        .label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .user-input {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            line-height: 1.6;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .marcus-response {
+            background: #fff8e1;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #ffc107;
+            font-size: 15px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .rating-section {
+            margin: 30px 0;
+        }
+        
+        .rating-item {
+            margin-bottom: 25px;
+        }
+        
+        .rating-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .rating-label {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+        
+        .rating-description {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+        
+        .rating-scale {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        }
+        
+        .rating-option {
+            flex: 1;
+            position: relative;
+        }
+        
+        .rating-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .rating-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: white;
+        }
+        
+        .rating-option input[type="radio"]:checked + label {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .rating-option label:hover {
+            border-color: #667eea;
+            background: #f5f7ff;
+        }
+        
+        .rating-option input[type="radio"]:checked + label:hover {
+            background: #5568d3;
+        }
+        
+        .rating-number {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .rating-text {
+            font-size: 11px;
+            text-align: center;
+        }
+        
+        .overall-rating {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f0f4ff;
+            border-radius: 8px;
+        }
+        
+        .overall-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .overall-option {
+            flex: 1;
+        }
+        
+        .overall-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .overall-option label {
+            display: block;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        
+        .overall-option input[type="radio"]:checked + label {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+        }
+        
+        .overall-option.yes label { border-color: #4caf50; }
+        .overall-option.yes input:checked + label { background: #4caf50; border-color: #4caf50; }
+        
+        .overall-option.maybe label { border-color: #ff9800; }
+        .overall-option.maybe input:checked + label { background: #ff9800; border-color: #ff9800; }
+        
+        .overall-option.no label { border-color: #f44336; }
+        .overall-option.no input:checked + label { background: #f44336; border-color: #f44336; }
+        
+        .comments {
+            margin-top: 20px;
+        }
+        
+        .comments textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+        
+        .completion-message {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .completion-message h2 {
+            color: #4caf50;
+            margin-bottom: 15px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Marcus AI Response Quality Evaluation</h1>
+        <p class="subtitle">Rate Marcus's responses on 5 dimensions. Your feedback establishes ground truth for AI improvement.</p>
+        
+        <div class="progress">
+            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+        
+        <div id="ratingForm">
+            <!-- Scenario will be injected here -->
+        </div>
+    </div>
+    
+    <script>
+        let currentIndex = 0;
+        let scenarios = [];
+        let ratings = [];
+        const raterId = 'rater_' + Date.now();
+        
+        // Load scenarios
+        async function loadScenarios() {
+            try {
+                const response = await fetch('../test_data/results.json');
+                scenarios = await response.json();
+                renderScenario();
+            } catch (error) {
+                console.error('Error loading scenarios:', error);
+                alert('Failed to load test scenarios. Make sure results.json exists.');
+            }
+        }
+        
+        function renderScenario() {
+            if (currentIndex >= scenarios.length) {
+                showCompletion();
+                return;
+            }
+            
+            const scenario = scenarios[currentIndex];
+            const progress = (currentIndex / scenarios.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            const html = `
+                <div class="scenario-card">
+                    <div class="label">Test ${currentIndex + 1} of ${scenarios.length}: ${scenario.test_id}</div>
+                    
+                    <div class="label" style="margin-top: 20px;">User Input:</div>
+                    <div class="user-input">${scenario.input}</div>
+                    
+                    <div class="label" style="margin-top: 15px;">Marcus's Response:</div>
+                    <div class="marcus-response">${scenario.marcus_response}</div>
+                </div>
+                
+                <div class="rating-section">
+                    ${renderRatingDimension('appropriateness', 'Appropriateness', 'Does the response fit the emotional context?')}
+                    ${renderRatingDimension('helpfulness', 'Helpfulness', 'Does it provide value, insight, or guidance?')}
+                    ${renderRatingDimension('stoic_authenticity', 'Stoic Authenticity', 'Does this sound like Marcus Aurelius?')}
+                    ${renderRatingDimension('emotional_intelligence', 'Emotional Intelligence', 'Does Marcus understand the user\'s state?')}
+                    ${renderRatingDimension('actionability', 'Actionability', 'When appropriate, does it provide clear guidance?')}
+                </div>
+                
+                <div class="overall-rating">
+                    <div class="rating-label">Overall: Would you want to receive this response?</div>
+                    <div class="overall-options">
+                        <div class="overall-option yes">
+                            <input type="radio" name="overall" id="overall-yes" value="yes">
+                            <label for="overall-yes">YES</label>
+                        </div>
+                        <div class="overall-option maybe">
+                            <input type="radio" name="overall" id="overall-maybe" value="maybe">
+                            <label for="overall-maybe">MAYBE</label>
+                        </div>
+                        <div class="overall-option no">
+                            <input type="radio" name="overall" id="overall-no" value="no">
+                            <label for="overall-no">NO</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comments">
+                    <div class="label">Optional Comments:</div>
+                    <textarea id="comments" placeholder="What made this response particularly good or bad?"></textarea>
+                </div>
+                
+                <div class="buttons">
+                    <button class="btn-secondary" onclick="previousScenario()" ${currentIndex === 0 ? 'disabled' : ''}>Previous</button>
+                    <button class="btn-primary" onclick="submitRating()">Next</button>
+                </div>
+            `;
+            
+            document.getElementById('ratingForm').innerHTML = html;
+        }
+        
+        function renderRatingDimension(id, label, description) {
+            return `
+                <div class="rating-item">
+                    <div class="rating-header">
+                        <div class="rating-label">${label}</div>
+                    </div>
+                    <div class="rating-description">${description}</div>
+                    <div class="rating-scale">
+                        ${[1,2,3,4,5].map(num => `
+                            <div class="rating-option">
+                                <input type="radio" name="${id}" id="${id}-${num}" value="${num}">
+                                <label for="${id}-${num}">
+                                    <div class="rating-number">${num}</div>
+                                    <div class="rating-text">${getRatingText(num)}</div>
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function getRatingText(num) {
+            const texts = {
+                1: 'Very Poor',
+                2: 'Poor',
+                3: 'Adequate',
+                4: 'Good',
+                5: 'Excellent'
+            };
+            return texts[num];
+        }
+        
+        function submitRating() {
+            // Collect ratings
+            const rating = {
+                test_id: scenarios[currentIndex].test_id,
+                rater_id: raterId,
+                timestamp: new Date().toISOString(),
+                ratings: {
+                    appropriateness: getSelectedValue('appropriateness'),
+                    helpfulness: getSelectedValue('helpfulness'),
+                    stoic_authenticity: getSelectedValue('stoic_authenticity'),
+                    emotional_intelligence: getSelectedValue('emotional_intelligence'),
+                    actionability: getSelectedValue('actionability')
+                },
+                overall: getSelectedValue('overall'),
+                comments: document.getElementById('comments').value
+            };
+            
+            // Validate all ratings selected
+            if (!rating.ratings.appropriateness || !rating.ratings.helpfulness || 
+                !rating.ratings.stoic_authenticity || !rating.ratings.emotional_intelligence || 
+                !rating.ratings.actionability || !rating.overall) {
+                alert('Please rate all dimensions before continuing.');
+                return;
+            }
+            
+            // Save rating
+            ratings.push(rating);
+            
+            // Save to localStorage as backup
+            localStorage.setItem('marcus_ratings', JSON.stringify(ratings));
+            localStorage.setItem('marcus_current_index', currentIndex + 1);
+            
+            // Move to next
+            currentIndex++;
+            renderScenario();
+        }
+        
+        function previousScenario() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderScenario();
+            }
+        }
+        
+        function getSelectedValue(name) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            return selected ? (isNaN(selected.value) ? selected.value : parseInt(selected.value)) : null;
+        }
+        
+        function showCompletion() {
+            // Calculate stats
+            const avgScores = {
+                appropriateness: 0,
+                helpfulness: 0,
+                stoic_authenticity: 0,
+                emotional_intelligence: 0,
+                actionability: 0
+            };
+            
+            ratings.forEach(r => {
+                Object.keys(avgScores).forEach(key => {
+                    avgScores[key] += r.ratings[key];
+                });
+            });
+            
+            Object.keys(avgScores).forEach(key => {
+                avgScores[key] /= ratings.length;
+            });
+            
+            const overall = avgScores.appropriateness + avgScores.helpfulness + 
+                          avgScores.stoic_authenticity + avgScores.emotional_intelligence + 
+                          avgScores.actionability;
+            const overallAvg = overall / 5;
+            
+            const yesCount = ratings.filter(r => r.overall === 'yes').length;
+            const yesPercent = (yesCount / ratings.length * 100).toFixed(0);
+            
+            document.getElementById('ratingForm').innerHTML = `
+                <div class="completion-message">
+                    <h2>✅ Evaluation Complete!</h2>
+                    <p>Thank you for rating all ${ratings.length} scenarios.</p>
+                    
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div class="stat-value">${overallAvg.toFixed(2)}</div>
+                            <div class="stat-label">Average Score</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${yesPercent}%</div>
+                            <div class="stat-label">Would Use Response</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${ratings.length}</div>
+                            <div class="stat-label">Scenarios Rated</div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary" onclick="downloadRatings()" style="margin-top: 30px; max-width: 300px;">
+                        Download Ratings Data
+                    </button>
+                </div>
+            `;
+        }
+        
+        function downloadRatings() {
+            const dataStr = JSON.stringify(ratings, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `marcus_ratings_${raterId}.json`;
+            link.click();
+        }
+        
+        // Load scenarios on page load
+        loadScenarios();
+        
+        // Restore progress if page reloaded
+        window.addEventListener('load', () => {
+            const savedRatings = localStorage.getItem('marcus_ratings');
+            const savedIndex = localStorage.getItem('marcus_current_index');
+            
+            if (savedRatings && savedIndex) {
+                if (confirm('Resume previous rating session?')) {
+                    ratings = JSON.parse(savedRatings);
+                    currentIndex = parseInt(savedIndex);
+                } else {
+                    localStorage.removeItem('marcus_ratings');
+                    localStorage.removeItem('marcus_current_index');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

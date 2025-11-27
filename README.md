@@ -2,6 +2,8 @@
 
 A comprehensive agentic workflow system for developing an interactive photorealistic Marcus Aurelius avatar using Cursor IDE.
 
+**🚀 Hardware Optimized:** Configured for Apple M4 Max (40-core GPU, 64GB RAM) - See `M4_MAX_CONFIG.md` and `UPGRADE_SUMMARY.md`
+
 ---
 
 ## Quick Start

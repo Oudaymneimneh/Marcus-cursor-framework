@@ -18,9 +18,21 @@ class PADLogic:
     
     # Sensitivity to new inputs
     REACTIVITY = 0.2
+    
+    # Default baseline (neutral state)
+    BASELINE = {'pleasure': 0.0, 'arousal': 0.0, 'dominance': 0.0}
+    
+    def __init__(self, baseline: Dict[str, float] = None):
+        """
+        Initialize PAD logic with optional custom baseline.
+        
+        Args:
+            baseline: Custom resting state (defaults to neutral)
+        """
+        self.baseline = baseline or self.BASELINE.copy()
 
-    @staticmethod
     def calculate_update(
+        self,
         current_pad: Dict[str, float],
         stimulus: Dict[str, float],
         baseline: Dict[str, float] = None
@@ -31,13 +43,13 @@ class PADLogic:
         Args:
             current_pad: Dict with 'pleasure', 'arousal', 'dominance'
             stimulus: Dict with impact values for p, a, d
-            baseline: Target resting state (default: 0,0,0)
+            baseline: Target resting state (uses instance baseline if not provided)
             
         Returns:
             New PAD state dictionary
         """
         if baseline is None:
-            baseline = {'pleasure': 0.0, 'arousal': 0.0, 'dominance': 0.0}
+            baseline = self.baseline
             
         new_state = {}
         
@@ -48,11 +60,11 @@ class PADLogic:
             
             # 1. Apply Stimulus (Reaction)
             # New input pulls the state towards the stimulus direction
-            reaction = current + (impact * PADLogic.REACTIVITY)
+            reaction = current + (impact * self.REACTIVITY)
             
             # 2. Apply Decay (Homeostasis)
             # State naturally drifts back towards baseline over time
-            decay = (base - reaction) * PADLogic.DECAY_RATE
+            decay = (base - reaction) * self.DECAY_RATE
             
             # 3. Clamp to Valid Range [-1.0, 1.0]
             final_val = max(-1.0, min(1.0, reaction + decay))
@@ -64,22 +76,36 @@ class PADLogic:
     @staticmethod
     def get_quadrant(pad: Dict[str, float]) -> str:
         """
-        Determine emotional quadrant/label based on PAD values.
-        Simplified mapping for high-level labels.
+        Determine emotional quadrant based on Pleasure and Arousal.
+        
+        Simplified 4-quadrant model (ignores dominance for MVP):
+        - Exuberant: High pleasure, high arousal (happy, energetic)
+        - Dependent: High pleasure, low arousal (content, calm)
+        - Hostile: Low pleasure, high arousal (angry, anxious)
+        - Bored: Low pleasure, low arousal (sad, withdrawn)
         """
-        p, a, d = pad.get('pleasure', 0), pad.get('arousal', 0), pad.get('dominance', 0)
+        p = pad.get('pleasure', 0)
+        a = pad.get('arousal', 0)
         
-        if p > 0 and a > 0 and d > 0: return "Exuberant"
-        if p > 0 and a > 0 and d < 0: return "Dependent"
-        if p > 0 and a < 0 and d > 0: return "Relaxed"
-        if p > 0 and a < 0 and d < 0: return "Docile"
-        
-        if p < 0 and a > 0 and d > 0: return "Hostile"
-        if p < 0 and a > 0 and d < 0: return "Anxious"
-        if p < 0 and a < 0 and d > 0: return "Disdainful"
-        if p < 0 and a < 0 and d < 0: return "Bored"
-        
-        return "Neutral"
+        # 4-quadrant classification based on pleasure and arousal
+        if p > 0:
+            if a > 0:
+                return "Exuberant"  # High pleasure, high arousal
+            else:
+                return "Dependent"  # High pleasure, low arousal
+        else:
+            if a > 0:
+                return "Hostile"    # Low pleasure, high arousal
+            else:
+                return "Bored"      # Low pleasure, low arousal
+
+
+
+
+
+
+
+
 
 
 

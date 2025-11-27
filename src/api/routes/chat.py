@@ -9,7 +9,7 @@ import uuid
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Query
 from pydantic import BaseModel, Field
 
 from src.api.dependencies import ConvService
@@ -40,13 +40,23 @@ class MessageRequest(BaseModel):
         max_length=2000,
         description="User message content"
     )
+    user_id: Optional[str] = Field(
+        None,
+        description="Optional user identifier for testing. If not provided, uses 'guest'."
+    )
 
 class ChatResponse(BaseModel):
-    """Complete response including Marcus's reply and emotional state."""
+    """Complete response including Marcus's reply, emotional state, and introspection data."""
     response: str
-    pad_state: Dict[str, float]
-    mood_label: str
-    message_id: Optional[uuid.UUID] = None  # ID of the user message
+    pad: Dict[str, float]  # Frontend expects "pad" not "pad_state"
+    quadrant: str  # Frontend expects "quadrant" not "mood_label"
+    message_id: Optional[uuid.UUID] = None
+    # Introspection fields
+    strategy_used: Optional[str] = None
+    effectiveness: Optional[float] = None
+    patterns_detected: Optional[List[str]] = None
+    relationship_stage: Optional[str] = None
+    warning_flags: Optional[List[str]] = None
 
 class MessageResponse(BaseModel):
     message_id: uuid.UUID
@@ -74,14 +84,15 @@ async def simple_chat(
     REQUEST_COUNT.labels(method="POST", path="/chat_simplified", status="200").inc()
     
     try:
-        # Use a default guest user
+        # Get user ID from request or use default guest
         # In a real app, this would come from auth token
-        guest_uuid = uuid.UUID('00000000-0000-0000-0000-000000000001')
+        user_identifier = request.user_id or "guest"
+        display_name = f"User {user_identifier}" if user_identifier != "guest" else "Guest User"
         
         # Get or create user
         user = await service.get_or_create_user(
-            external_id="guest",
-            display_name="Guest User"
+            external_id=user_identifier,
+            display_name=display_name
         )
         
         # Get active session (or create new one)
@@ -104,8 +115,13 @@ async def simple_chat(
         
         return ChatResponse(
             response=result["response"],
-            pad_state=result["pad"],
-            mood_label=result["quadrant"]
+            pad=result["pad"],
+            quadrant=result["quadrant"],
+            strategy_used=result.get("strategy_used"),
+            effectiveness=result.get("effectiveness"),
+            patterns_detected=result.get("patterns_detected"),
+            relationship_stage=result.get("relationship_stage"),
+            warning_flags=result.get("warning_flags")
         )
         
     except Exception as e:
@@ -214,17 +230,19 @@ async def chat(
 @router.get("/chat/history", response_model=List[MessageResponse])
 @track_time(REQUEST_LATENCY, {"method": "GET", "path": "/chat/history"})
 async def get_simple_history(
-    service: ConvService
+    service: ConvService,
+    user_id: Optional[str] = Query(None, description="User identifier. Defaults to 'guest'.")
 ):
     """
-    Get history for the default guest user (simplified).
+    Get history for a user (simplified).
+    If user_id not provided, uses 'guest'.
     """
     try:
-        # Same guest logic as simple_chat
-        guest_uuid = uuid.UUID('00000000-0000-0000-0000-000000000001')
+        user_identifier = user_id or "guest"
+        display_name = f"User {user_identifier}" if user_identifier != "guest" else "Guest User"
         user = await service.get_or_create_user(
-            external_id="guest",
-            display_name="Guest User"
+            external_id=user_identifier,
+            display_name=display_name
         )
         session = await service.get_active_session(user.user_id)
         
@@ -248,4 +266,37 @@ async def get_simple_history(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to retrieve history"
+        )
+
+
+@router.post("/chat/new-session")
+@track_time(REQUEST_LATENCY, {"method": "POST", "path": "/chat/new-session"})
+async def start_new_session(
+    service: ConvService,
+    user_id: Optional[str] = Query(None, description="User identifier. Defaults to 'guest'.")
+):
+    """
+    Close current session and prepare for a new one.
+    Next message will start a fresh session.
+    """
+    try:
+        user_identifier = user_id or "guest"
+        display_name = f"User {user_identifier}" if user_identifier != "guest" else "Guest User"
+        user = await service.get_or_create_user(
+            external_id=user_identifier,
+            display_name=display_name
+        )
+        session = await service.get_active_session(user.user_id)
+        
+        if session:
+            # Close current session
+            await service.sessions.close_session(session.session_id)
+            logger.info(f"Closed session {session.session_id} for new session")
+        
+        return {"status": "ok", "message": "Session closed. Next message will start a new session."}
+    except Exception as e:
+        logger.error(f"Failed to start new session: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to start new session"
         )

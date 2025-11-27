@@ -9,7 +9,9 @@ from datetime import datetime
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import Response
+from fastapi.responses import Response, FileResponse
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 
 from src.config import get_settings
 from src.infrastructure.logging import setup_logging, get_logger, LoggingMiddleware
@@ -61,7 +63,7 @@ def create_app() -> FastAPI:
     
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=settings.cors_origins,
+        allow_origins=["*"],  # Allow all origins for testing (file:// and localhost)
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -69,6 +71,25 @@ def create_app() -> FastAPI:
     
     # Routers
     app.include_router(chat.router, prefix="/api/v1")
+    
+    # Serve HTML test files
+    @app.get("/test-scenarios")
+    async def test_scenarios():
+        """Serve the test scenarios runner HTML."""
+        html_path = Path(__file__).parent.parent.parent / "test_scenarios_runner.html"
+        return FileResponse(html_path)
+    
+    @app.get("/monitor")
+    async def monitor():
+        """Serve the introspection monitor HTML."""
+        html_path = Path(__file__).parent.parent.parent / "marcus_monitor.html"
+        return FileResponse(html_path)
+    
+    @app.get("/")
+    async def root():
+        """Serve the simple chat HTML."""
+        html_path = Path(__file__).parent.parent.parent / "chat.html"
+        return FileResponse(html_path)
     
     # Health Check
     @app.get("/health")

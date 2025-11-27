@@ -1,0 +1,34 @@
+{
+  "scenarios": {
+    "strategy_selection": [
+      {
+        "scenario_id": "strat_crisis_001",
+        "test_focus": "Crisis keyword detection",
+        "user_input": "Everything is falling apart and I can't handle this anymore",
+        "expected_strategy": "supportive",
+        "expected_reason": "CRISIS_KEYWORDS"
+      },
+      {
+        "scenario_id": "strat_energy_001",
+        "test_focus": "Low motivation detection",
+        "user_input": "I have no motivation to do anything today",
+        "expected_strategy": "energizing",
+        "expected_reason": "ENERGY_KEYWORDS"
+      }
+    ],
+    "pattern_detection": [
+      {
+        "scenario_id": "pattern_catastrophizing_001",
+        "test_focus": "Catastrophizing detection",
+        "user_input": "Everything always goes wrong for me. Nothing ever works out.",
+        "expected_pattern": "catastrophizing"
+      },
+      {
+        "scenario_id": "pattern_solution_001",
+        "test_focus": "Solution-seeking questions",
+        "user_input": "What should I do? How can I fix this?",
+        "expected_pattern": "solution_seeking"
+      }
+    ]
+  }
+}

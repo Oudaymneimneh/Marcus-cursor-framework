@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcus AI - Live Monitoring Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            background: #0d1117;
+            color: #c9d1d9;
+            padding: 20px;
+            font-size: 13px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .panel {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .panel h2 {
+            color: #58a6ff;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 10px;
+        }
+
+        .chat-panel {
+            grid-column: 1 / -1;
+        }
+
+        .message {
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 3px solid;
+        }
+
+        .message.user {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: #2196f3;
+        }
+
+        .message.marcus {
+            background: rgba(156, 39, 176, 0.1);
+            border-color: #9c27b0;
+        }
+
+        .introspection-data {
+            background: #0d1117;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border: 1px solid #30363d;
+            font-size: 11px;
+        }
+
+        .introspection-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #21262d;
+        }
+
+        .introspection-item:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #8b949e;
+            font-weight: 600;
+        }
+
+        .value {
+            color: #58a6ff;
+        }
+
+        .value.strategy {
+            color: #a5d6a7;
+        }
+
+        .value.effectiveness {
+            color: #ffd54f;
+        }
+
+        .value.pattern {
+            color: #ce93d8;
+        }
+
+        .value.warning {
+            color: #ef5350;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        input {
+            flex: 1;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        button {
+            background: #238636;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #2ea043;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pad-display {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .pad-item {
+            background: #0d1117;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+        }
+
+        .pad-bar {
+            height: 8px;
+            background: #21262d;
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .pad-fill {
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .pad-fill.pleasure {
+            background: linear-gradient(90deg, #f44336 0%, #4caf50 100%);
+        }
+
+        .pad-fill.arousal {
+            background: linear-gradient(90deg, #2196f3 0%, #ff9800 100%);
+        }
+
+        .pad-fill.dominance {
+            background: linear-gradient(90deg, #9c27b0 0%, #e91e63 100%);
+        }
+
+        .decision-tree {
+            background: #0d1117;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border: 1px solid #30363d;
+            font-size: 11px;
+        }
+
+        .decision-step {
+            padding: 4px 0;
+            color: #8b949e;
+        }
+
+        .decision-step.active {
+            color: #58a6ff;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .status-badge.success {
+            background: rgba(46, 160, 67, 0.2);
+            color: #4caf50;
+        }
+
+        .status-badge.warning {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffd54f;
+        }
+
+        .status-badge.error {
+            background: rgba(244, 67, 54, 0.2);
+            color: #ef5350;
+        }
+
+        .memory-section {
+            margin-top: 15px;
+        }
+
+        .memory-item {
+            background: #0d1117;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 6px 0;
+            border-left: 2px solid #58a6ff;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: #58a6ff; margin-bottom: 20px;">🧠 Marcus AI - Live Introspection Monitor</h1>
+    
+    <div class="container">
+        <div class="panel chat-panel">
+            <h2>💬 Conversation</h2>
+            <div id="messages"></div>
+            <div class="input-area">
+                <input type="text" id="messageInput" placeholder="Type a message to see Marcus's thinking process...">
+                <button id="sendButton">Send</button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>🎯 Strategy & Decision Making</h2>
+            <div id="strategyDisplay">
+                <div class="introspection-item">
+                    <span class="label">Strategy Selected:</span>
+                    <span class="value strategy" id="strategy">-</span>
+                </div>
+                <div class="introspection-item">
+                    <span class="label">Effectiveness Score:</span>
+                    <span class="value effectiveness" id="effectiveness">-</span>
+                </div>
+                <div class="introspection-item">
+                    <span class="label">Relationship Stage:</span>
+                    <span class="value" id="relationshipStage">-</span>
+                </div>
+                <div class="decision-tree" id="decisionTree">
+                    <div class="decision-step">Waiting for interaction...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>🧩 Pattern Detection</h2>
+            <div id="patternDisplay">
+                <div class="introspection-item">
+                    <span class="label">Patterns Detected:</span>
+                    <span class="value pattern" id="patterns">None</span>
+                </div>
+                <div class="introspection-item">
+                    <span class="label">Warning Flags:</span>
+                    <span class="value warning" id="warnings">None</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>💭 Emotional State (PAD)</h2>
+            <div class="pad-display">
+                <div class="pad-item">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Pleasure</span>
+                        <span id="pleasureValue">0.00</span>
+                    </div>
+                    <div class="pad-bar">
+                        <div class="pad-fill pleasure" id="pleasureBar" style="width: 50%;"></div>
+                    </div>
+                </div>
+                <div class="pad-item">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Arousal</span>
+                        <span id="arousalValue">0.00</span>
+                    </div>
+                    <div class="pad-bar">
+                        <div class="pad-fill arousal" id="arousalBar" style="width: 50%;"></div>
+                    </div>
+                </div>
+                <div class="pad-item">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Dominance</span>
+                        <span id="dominanceValue">0.00</span>
+                    </div>
+                    <div class="pad-bar">
+                        <div class="pad-fill dominance" id="dominanceBar" style="width: 50%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 15px; text-align: center; padding: 10px; background: #0d1117; border-radius: 6px;">
+                <strong>Quadrant:</strong> <span id="quadrant">Neutral</span>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>📊 Memory & Learning</h2>
+            <div class="memory-section">
+                <div class="introspection-item">
+                    <span class="label">Total Interactions:</span>
+                    <span class="value" id="totalInteractions">0</span>
+                </div>
+                <div class="introspection-item">
+                    <span class="label">Learning Stage:</span>
+                    <span class="value" id="learningStage">-</span>
+                </div>
+                <div id="memoryItems"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000';
+        let interactionCount = 0;
+
+        function updatePAD(pad) {
+            const p = pad.pleasure || 0;
+            const a = pad.arousal || 0;
+            const d = pad.dominance || 0;
+
+            const pPercent = ((p + 1) / 2) * 100;
+            const aPercent = ((a + 1) / 2) * 100;
+            const dPercent = ((d + 1) / 2) * 100;
+
+            document.getElementById('pleasureBar').style.width = `${pPercent}%`;
+            document.getElementById('arousalBar').style.width = `${aPercent}%`;
+            document.getElementById('dominanceBar').style.width = `${dPercent}%`;
+
+            document.getElementById('pleasureValue').textContent = p.toFixed(2);
+            document.getElementById('arousalValue').textContent = a.toFixed(2);
+            document.getElementById('dominanceValue').textContent = d.toFixed(2);
+        }
+
+        function updateIntrospection(data) {
+            // Strategy
+            document.getElementById('strategy').textContent = data.strategy_used || '-';
+            
+            // Effectiveness
+            const eff = data.effectiveness;
+            const effElement = document.getElementById('effectiveness');
+            if (eff !== null && eff !== undefined) {
+                effElement.textContent = eff.toFixed(3);
+                effElement.className = 'value effectiveness ' + 
+                    (eff > 0.7 ? 'success' : eff > 0.4 ? 'warning' : 'error');
+            } else {
+                effElement.textContent = '-';
+            }
+
+            // Patterns
+            const patterns = data.patterns_detected || [];
+            document.getElementById('patterns').textContent = 
+                patterns.length > 0 ? patterns.join(', ') : 'None';
+
+            // Warnings
+            const warnings = data.warning_flags || [];
+            document.getElementById('warnings').textContent = 
+                warnings.length > 0 ? warnings.join(', ') : 'None';
+
+            // Relationship
+            document.getElementById('relationshipStage').textContent = 
+                data.relationship_stage || 'Stranger';
+
+            // Quadrant
+            document.getElementById('quadrant').textContent = data.quadrant || 'Neutral';
+
+            // Decision tree
+            updateDecisionTree(data);
+        }
+
+        function updateDecisionTree(data) {
+            const tree = document.getElementById('decisionTree');
+            const steps = [];
+            
+            // Show decision process
+            if (data.warning_flags && data.warning_flags.length > 0) {
+                steps.push(`⚠️ Warning flags detected: ${data.warning_flags.join(', ')}`);
+            }
+            
+            if (data.patterns_detected && data.patterns_detected.length > 0) {
+                steps.push(`🧩 Patterns detected: ${data.patterns_detected.join(', ')}`);
+            }
+            
+            steps.push(`🎯 Strategy selected: ${data.strategy_used || 'balanced'}`);
+            steps.push(`📊 Effectiveness: ${(data.effectiveness || 0).toFixed(3)}`);
+            
+            tree.innerHTML = steps.map((step, i) => 
+                `<div class="decision-step ${i === steps.length - 1 ? 'active' : ''}">${step}</div>`
+            ).join('');
+        }
+
+        function addMessage(role, content, introspectionData = null) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            
+            let html = `<div><strong>${role === 'user' ? 'You' : 'Marcus'}:</strong> ${content}</div>`;
+            
+            if (introspectionData && role === 'marcus') {
+                html += `<div class="introspection-data">
+                    <div class="introspection-item">
+                        <span class="label">Strategy:</span>
+                        <span class="value strategy">${introspectionData.strategy_used || '-'}</span>
+                    </div>
+                    <div class="introspection-item">
+                        <span class="label">Effectiveness:</span>
+                        <span class="value effectiveness">${(introspectionData.effectiveness || 0).toFixed(3)}</span>
+                    </div>
+                    <div class="introspection-item">
+                        <span class="label">Patterns:</span>
+                        <span class="value pattern">${(introspectionData.patterns_detected || []).join(', ') || 'None'}</span>
+                    </div>
+                    <div class="introspection-item">
+                        <span class="label">Warnings:</span>
+                        <span class="value warning">${(introspectionData.warning_flags || []).join(', ') || 'None'}</span>
+                    </div>
+                    <div class="introspection-item">
+                        <span class="label">Relationship:</span>
+                        <span class="value">${introspectionData.relationship_stage || 'Stranger'}</span>
+                    </div>
+                </div>`;
+            }
+            
+            messageDiv.innerHTML = html;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const button = document.getElementById('sendButton');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addMessage('user', message);
+            input.value = '';
+            button.disabled = true;
+            button.textContent = 'Sending...';
+            
+            try {
+                const response = await fetch(`${API_URL}/api/v1/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: message })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                addMessage('marcus', data.response, data);
+                updatePAD(data.pad);
+                updateIntrospection(data);
+                
+                interactionCount++;
+                document.getElementById('totalInteractions').textContent = interactionCount;
+                
+                // Update learning stage
+                if (interactionCount < 10) {
+                    document.getElementById('learningStage').textContent = 'Warming Up';
+                } else if (interactionCount < 50) {
+                    document.getElementById('learningStage').textContent = 'Learning';
+                } else {
+                    document.getElementById('learningStage').textContent = 'Proficient';
+                }
+                
+            } catch (error) {
+                addMessage('marcus', `Error: ${error.message}. Make sure the backend is running on ${API_URL}`);
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Send';
+                input.focus();
+            }
+        }
+        
+        document.getElementById('sendButton').addEventListener('click', sendMessage);
+        document.getElementById('messageInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

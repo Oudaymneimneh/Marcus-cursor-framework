@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Marcus AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 40px);
+            gap: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .status {
+            text-align: center;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .status.healthy {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+
+        .status.error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .chat-section {
+            display: flex;
+            flex-direction: column;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            padding: 12px 16px;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            background: rgba(33, 150, 243, 0.3);
+            border: 1px solid rgba(33, 150, 243, 0.5);
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        .message.marcus {
+            background: rgba(156, 39, 176, 0.3);
+            border: 1px solid rgba(156, 39, 176, 0.5);
+            align-self: flex-start;
+        }
+
+        .message-header {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .session-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        #newSessionButton {
+            padding: 8px 16px;
+            background: rgba(244, 67, 54, 0.3);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+            border-radius: 6px;
+            color: #ffcdd2;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #newSessionButton:hover {
+            background: rgba(244, 67, 54, 0.5);
+        }
+
+        .user-selector {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .user-selector label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        #userIdInput {
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.85rem;
+            width: 120px;
+        }
+
+        #userIdInput:focus {
+            outline: none;
+            border-color: rgba(156, 39, 176, 0.5);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .current-user {
+            font-size: 0.75rem;
+            color: rgba(156, 39, 176, 0.8);
+            margin-left: 8px;
+        }
+
+        #messageInput {
+            flex: 1;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        #messageInput:focus {
+            outline: none;
+            border-color: rgba(156, 39, 176, 0.5);
+            background: rgba(255,255,255,0.15);
+        }
+
+        #sendButton {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #sendButton:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(156, 39, 176, 0.4);
+        }
+
+        #sendButton:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pad-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .pad-section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .pad-dimension {
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .pad-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .pad-bar {
+            height: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .pad-fill {
+            height: 100%;
+            transition: width 0.5s ease-out, background 0.5s;
+            border-radius: 10px;
+        }
+
+        .pad-fill.pleasure {
+            background: linear-gradient(90deg, #f44336 0%, #4caf50 100%);
+        }
+
+        .pad-fill.arousal {
+            background: linear-gradient(90deg, #2196f3 0%, #ff9800 100%);
+        }
+
+        .pad-fill.dominance {
+            background: linear-gradient(90deg, #9c27b0 0%, #e91e63 100%);
+        }
+
+        .pad-value {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .mood-label {
+            text-align: center;
+            padding: 12px;
+            background: rgba(156, 39, 176, 0.2);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: 1px solid rgba(156, 39, 176, 0.5);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+            padding: 12px;
+            border-radius: 8px;
+            color: #ffcdd2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏛️ Marcus AI Avatar</h1>
+        <div id="status" class="status">Checking backend connection...</div>
+
+        <div class="main-content">
+            <div class="chat-section">
+                <div class="messages" id="messages">
+                    <!-- Messages will be loaded here -->
+                </div>
+                <div class="session-controls">
+                    <button id="newSessionButton" title="Start a new conversation">🔄 New Session</button>
+                    <div class="user-selector">
+                        <label for="userIdInput">User:</label>
+                        <input 
+                            type="text" 
+                            id="userIdInput" 
+                            placeholder="guest"
+                            value="guest"
+                            title="Change user ID to test multi-user support"
+                        >
+                        <span class="current-user" id="currentUserDisplay">(guest)</span>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <input 
+                        type="text" 
+                        id="messageInput" 
+                        placeholder="Type your message to Marcus..."
+                        autocomplete="off"
+                    >
+                    <button id="sendButton">Send</button>
+                </div>
+            </div>
+
+            <div class="pad-section">
+                <h2>Emotional State (PAD)</h2>
+                <div class="mood-label" id="moodLabel">Neutral</div>
+                
+                <div class="pad-dimension">
+                    <div class="pad-label">
+                        <span>Pleasure</span>
+                        <span id="pleasureValue">0.00</span>
+                    </div>
+                    <div class="pad-bar">
+                        <div class="pad-fill pleasure" id="pleasureBar" style="width: 50%;"></div>
+                        <div class="pad-value" id="pleasureText">0.00</div>
+                    </div>
+                </div>
+
+                <div class="pad-dimension">
+                    <div class="pad-label">
+                        <span>Arousal</span>
+                        <span id="arousalValue">0.00</span>
+                    </div>
+                    <div class="pad-bar">
+                        <div class="pad-fill arousal" id="arousalBar" style="width: 50%;"></div>
+                        <div class="pad-value" id="arousalText">0.00</div>
+                    </div>
+                </div>
+
+                <div class="pad-dimension">
+                    <div class="pad-label">
+                        <span>Dominance</span>
+                        <span id="dominanceValue">0.00</span>
+                    </div>
+                    <div class="pad-bar">
+                        <div class="pad-fill dominance" id="dominanceBar" style="width: 50%;"></div>
+                        <div class="pad-value" id="dominanceText">0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000';
+        const messagesDiv = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+        const statusDiv = document.getElementById('status');
+
+        // PAD display elements
+        const moodLabel = document.getElementById('moodLabel');
+        const pleasureBar = document.getElementById('pleasureBar');
+        const arousalBar = document.getElementById('arousalBar');
+        const dominanceBar = document.getElementById('dominanceBar');
+        const pleasureText = document.getElementById('pleasureText');
+        const arousalText = document.getElementById('arousalText');
+        const dominanceText = document.getElementById('dominanceText');
+        const pleasureValue = document.getElementById('pleasureValue');
+        const arousalValue = document.getElementById('arousalValue');
+        const dominanceValue = document.getElementById('dominanceValue');
+
+        // Session management
+        let currentSessionId = null;
+        let currentUserId = 'guest';
+        
+        // Get current user ID from input
+        const userIdInput = document.getElementById('userIdInput');
+        const currentUserDisplay = document.getElementById('currentUserDisplay');
+        
+        // Update user ID when input changes
+        userIdInput.addEventListener('change', (e) => {
+            const newUserId = e.target.value.trim() || 'guest';
+            if (newUserId !== currentUserId) {
+                currentUserId = newUserId;
+                currentUserDisplay.textContent = `(${newUserId})`;
+                // Reload history for new user
+                loadHistory();
+            }
+        });
+
+        // Check backend health on load
+        async function checkHealth() {
+            try {
+                const response = await fetch(`${API_URL}/health`);
+                const data = await response.json();
+                if (data.status === 'healthy') {
+                    statusDiv.textContent = `✅ Backend: ${data.status} | Database: ${data.services.database} | Redis: ${data.services.redis} | OpenAI: ${data.services.openai}`;
+                    statusDiv.className = 'status healthy';
+                    return true;
+                } else {
+                    statusDiv.textContent = `⚠️ Backend: ${data.status}`;
+                    statusDiv.className = 'status error';
+                    return false;
+                }
+            } catch (error) {
+                statusDiv.textContent = `❌ Cannot connect to backend. Is it running on ${API_URL}?`;
+                statusDiv.className = 'status error';
+                return false;
+            }
+        }
+
+        // Load conversation history
+        async function loadHistory() {
+            try {
+                const url = `${API_URL}/api/v1/chat/history${currentUserId !== 'guest' ? `?user_id=${encodeURIComponent(currentUserId)}` : ''}`;
+                const response = await fetch(url);
+                if (!response.ok) {
+                    // No history - show initial greeting
+                    addMessage('marcus', 'Greetings. I am Marcus, ready to engage in thoughtful dialogue. How may I assist you today?', false);
+                    return;
+                }
+                const messages = await response.json();
+                
+                if (messages.length === 0) {
+                    // Empty history - show initial greeting
+                    addMessage('marcus', 'Greetings. I am Marcus, ready to engage in thoughtful dialogue. How may I assist you today?', false);
+                    return;
+                }
+                
+                // Load all messages from history
+                messages.forEach(msg => {
+                    const role = msg.role === 'user' ? 'user' : 'marcus';
+                    addMessage(role, msg.content, false); // false = don't animate
+                });
+                
+                // Scroll to bottom
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                
+                console.log(`Loaded ${messages.length} messages from history`);
+            } catch (error) {
+                console.error('Failed to load history:', error);
+                // On error, show initial greeting
+                addMessage('marcus', 'Greetings. I am Marcus, ready to engage in thoughtful dialogue. How may I assist you today?', false);
+            }
+        }
+
+        // Update PAD visualization
+        function updatePAD(padState, mood) {
+            const p = padState.pleasure || 0;
+            const a = padState.arousal || 0;
+            const d = padState.dominance || 0;
+
+            // Convert -1 to 1 range to 0-100% for display
+            const pPercent = ((p + 1) / 2) * 100;
+            const aPercent = ((a + 1) / 2) * 100;
+            const dPercent = ((d + 1) / 2) * 100;
+
+            pleasureBar.style.width = `${pPercent}%`;
+            arousalBar.style.width = `${aPercent}%`;
+            dominanceBar.style.width = `${dPercent}%`;
+
+            pleasureText.textContent = p.toFixed(2);
+            arousalText.textContent = a.toFixed(2);
+            dominanceText.textContent = d.toFixed(2);
+
+            pleasureValue.textContent = p.toFixed(2);
+            arousalValue.textContent = a.toFixed(2);
+            dominanceValue.textContent = d.toFixed(2);
+
+            moodLabel.textContent = mood || 'Neutral';
+        }
+
+        // Add message to chat
+        function addMessage(role, content, animate = true) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            if (!animate) {
+                messageDiv.style.animation = 'none';
+            }
+            messageDiv.innerHTML = `
+                <div class="message-header">${role === 'user' ? 'You' : 'Marcus'}</div>
+                <div>${content}</div>
+            `;
+            messagesDiv.appendChild(messageDiv);
+            if (animate) {
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+        }
+
+        // Send message
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            // Add user message to UI
+            addMessage('user', message);
+            messageInput.value = '';
+            sendButton.disabled = true;
+            sendButton.innerHTML = '<span class="loading"></span>';
+
+            try {
+                const response = await fetch(`${API_URL}/api/v1/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        content: message,
+                        user_id: currentUserId !== 'guest' ? currentUserId : null
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+                }
+
+                const data = await response.json();
+
+                // Add Marcus response
+                addMessage('marcus', data.response);
+
+                // Update PAD visualization
+                updatePAD(data.pad, data.quadrant);
+
+            } catch (error) {
+                addMessage('marcus', `Error: ${error.message}. Make sure the backend is running and your OpenAI API key is set.`);
+                console.error('Chat error:', error);
+            } finally {
+                sendButton.disabled = false;
+                sendButton.textContent = 'Send';
+                messageInput.focus();
+            }
+        }
+
+        // Start new session
+        async function startNewSession() {
+            if (!confirm('Start a new conversation? This will end the current session.')) {
+                return;
+            }
+            
+            try {
+                // Close current session on backend
+                const url = `${API_URL}/api/v1/chat/new-session${currentUserId !== 'guest' ? `?user_id=${encodeURIComponent(currentUserId)}` : ''}`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to close session');
+                }
+                
+                // Clear current messages
+                messagesDiv.innerHTML = '';
+                
+                // Show greeting for new session
+                addMessage('marcus', 'Greetings. I am Marcus, ready to engage in thoughtful dialogue. How may I assist you today?', false);
+                
+                // Reset PAD to neutral
+                updatePAD({pleasure: 0.1, arousal: 0.1, dominance: 0.1}, 'Neutral');
+                
+                console.log('New session started');
+            } catch (error) {
+                console.error('Failed to start new session:', error);
+                alert('Failed to start new session. Please try again.');
+            }
+        }
+
+        // Event listeners
+        sendButton.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        document.getElementById('newSessionButton').addEventListener('click', startNewSession);
+
+        // Initialize
+        async function init() {
+            const healthy = await checkHealth();
+            if (healthy) {
+                await loadHistory();
+            }
+            messageInput.focus();
+        }
+        
+        init();
+    </script>
+</body>
+</html>
+

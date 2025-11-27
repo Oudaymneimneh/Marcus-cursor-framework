@@ -23,12 +23,26 @@ from sqlalchemy import (
     func,
 )
 from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy.types import TypeDecorator
 from sqlalchemy.orm import (
     DeclarativeBase,
     Mapped,
     mapped_column,
     relationship,
 )
+
+
+# Type that works for both PostgreSQL (JSONB) and SQLite (JSON)
+class UniversalJSON(TypeDecorator):
+    """A JSON type that adapts to the backend: JSONB for PostgreSQL, JSON otherwise."""
+    impl = JSON
+    cache_ok = True
+
+    def load_dialect_impl(self, dialect):
+        if dialect.name == 'postgresql':
+            return dialect.type_descriptor(JSONB())
+        else:
+            return dialect.type_descriptor(JSON())
 
 
 class Base(DeclarativeBase):
@@ -56,7 +70,7 @@ class User(Base):
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False
     )
     metadata_: Mapped[Dict[str, Any]] = mapped_column(
-        "metadata", JSONB, server_default="{}", nullable=False
+        "metadata", UniversalJSON, server_default="{}", nullable=False
     )
 
     # Relationships
@@ -94,7 +108,7 @@ class Session(Base):
     )
     total_turns: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     metadata_: Mapped[Dict[str, Any]] = mapped_column(
-        "metadata", JSONB, server_default="{}", nullable=False
+        "metadata", UniversalJSON, server_default="{}", nullable=False
     )
 
     # Relationships
@@ -134,7 +148,7 @@ class Message(Base):
         DateTime(timezone=True), server_default=func.now(), nullable=False, index=True
     )
     metadata_: Mapped[Dict[str, Any]] = mapped_column(
-        "metadata", JSONB, server_default="{}", nullable=False
+        "metadata", UniversalJSON, server_default="{}", nullable=False
     )
 
     # Relationships
@@ -208,9 +222,9 @@ class Pattern(Base):
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False
     )
     
-    evidence: Mapped[List[str]] = mapped_column(JSONB, server_default="[]", nullable=False)
+    evidence: Mapped[List[str]] = mapped_column(UniversalJSON, server_default="[]", nullable=False)
     metadata_: Mapped[Dict[str, Any]] = mapped_column(
-        "metadata", JSONB, server_default="{}", nullable=False
+        "metadata", UniversalJSON, server_default="{}", nullable=False
     )
 
     # Relationships
@@ -241,7 +255,7 @@ class Strategy(Base):
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )
     metadata_: Mapped[Dict[str, Any]] = mapped_column(
-        "metadata", JSONB, server_default="{}", nullable=False
+        "metadata", UniversalJSON, server_default="{}", nullable=False
     )
 
     # Relationships
@@ -263,7 +277,7 @@ class Event(Base):
     )
     event_type: Mapped[str] = mapped_column(String(100), nullable=False)
     event_data: Mapped[Dict[str, Any]] = mapped_column(
-        JSONB, server_default="{}", nullable=False
+        UniversalJSON, server_default="{}", nullable=False
     )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
@@ -300,7 +314,7 @@ class BehavioralState(Base):
     crisis_level: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     
     flow_data: Mapped[Dict[str, Any]] = mapped_column(
-        JSONB, server_default="{}", nullable=False
+        UniversalJSON, server_default="{}", nullable=False
     )  # Stores pacing, turn_count, topic_depth
     
     recorded_at: Mapped[datetime] = mapped_column(
@@ -313,6 +327,14 @@ class BehavioralState(Base):
 
     def __repr__(self) -> str:
         return f"<BehavioralState(stage={self.relationship_stage}, crisis={self.crisis_level})>"
+
+
+
+
+
+
+
+
 
 
 
